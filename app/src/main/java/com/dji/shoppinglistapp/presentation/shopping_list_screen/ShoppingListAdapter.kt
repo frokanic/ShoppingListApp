@@ -9,6 +9,7 @@ import com.dji.shoppinglistapp.domain.model.ListItem
 
 class ShoppingListAdapter(
     private val editHandler: (item: ListItem) -> Unit,
+    private val updateCheckboxHandler: (item: ListItem) -> Unit,
     private val deleteHandler: (item: ListItem) -> Unit
 ): RecyclerView.Adapter<ShoppingListAdapter.ViewHolder>() {
 
@@ -54,7 +55,7 @@ class ShoppingListAdapter(
                 } else {
                     binding.itemName.paintFlags = binding.itemName.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
-                editHandler(item)
+                updateCheckboxHandler(item)
             }
 
             binding.editSymbol.setOnClickListener {

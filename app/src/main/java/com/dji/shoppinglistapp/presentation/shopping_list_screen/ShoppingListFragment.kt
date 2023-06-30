@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -42,7 +43,12 @@ class ShoppingListFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = ShoppingListAdapter(
-            editHandler = { item -> viewModel.updateItem(item) },
+            editHandler = { item ->
+                showEditItemDialog(item)  //This will show a dialog allowing the user to edit the item name
+            },
+            updateCheckboxHandler = { item ->
+                viewModel.updateCheckbox(item)
+            },
             deleteHandler = { item -> viewModel.deleteItem(item) }
         )
 
@@ -89,6 +95,21 @@ class ShoppingListFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun showEditItemDialog(item: ListItem) {
+        val editText = EditText(requireContext())
+        editText.setText(item.name)
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Edit Item")
+            .setView(editText)
+            .setPositiveButton("Update") { _, _ ->
+                val updatedItem = item.copy(name = editText.text.toString())
+                viewModel.updateItem(updatedItem)  //This will trigger the UpdateItemUseCase
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 
     override fun onDestroyView() {

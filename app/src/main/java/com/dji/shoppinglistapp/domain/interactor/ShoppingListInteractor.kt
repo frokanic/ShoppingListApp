@@ -16,6 +16,10 @@ class ShoppingListInteractor(
         repository.deleteAllItems()
     }
 
+    suspend fun updateCheckbox(item: ListItem) {
+        repository.updateItem(item)
+    }
+
     fun getAllItems(): Flow<List<ListItem>> {
         return repository.getAllItems()
     }

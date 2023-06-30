@@ -57,4 +57,10 @@ class ShoppingListViewModel @Inject constructor(
             shoppingListInteractor.deleteAllItems()
         }
     }
+
+    fun updateCheckbox(item: ListItem) {
+        viewModelScope.launch {
+            shoppingListInteractor.updateCheckbox(item)
+        }
+    }
 }
