@@ -27,7 +27,9 @@ object AppModule {
             app,
             ListItemDatabase::class.java,
             ListItemDatabase.DATABASE_NAME
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides

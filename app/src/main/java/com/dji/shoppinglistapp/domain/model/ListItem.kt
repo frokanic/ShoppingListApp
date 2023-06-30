@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class ListItem(
     val name: String,
-    val isChecked: Boolean = false,
-    @PrimaryKey
+    var isChecked: Boolean = false,
+    @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 )

@@ -8,7 +8,7 @@ import com.dji.shoppinglistapp.domain.model.ListItem
 
 @Database(
     entities = [ListItem::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class ListItemDatabase: RoomDatabase() {
