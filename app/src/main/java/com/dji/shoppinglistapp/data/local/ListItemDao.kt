@@ -22,4 +22,7 @@ interface ListItemDao {
     @Query("SELECT * FROM ListItem")
     fun getAllItems(): Flow<List<ListItem>>
 
+    @Query("SELECT COUNT(*) FROM ListItem")
+    fun getItemCount(): Flow<Int>
+
 }

@@ -25,6 +25,9 @@ class ShoppingListViewModel @Inject constructor(
 
     val errorMessage = MutableLiveData<String>()
 
+    val itemCount: LiveData<Int> = shoppingListInteractor.getItemCount().asLiveData()
+
+
     fun insertItem(item: ListItem) {
         viewModelScope.launch {
             val result = shoppingListUseCases.insertItemUseCase(item)

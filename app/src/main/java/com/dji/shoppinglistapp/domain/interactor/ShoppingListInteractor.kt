@@ -19,4 +19,9 @@ class ShoppingListInteractor(
     fun getAllItems(): Flow<List<ListItem>> {
         return repository.getAllItems()
     }
+
+    fun getItemCount(): Flow<Int> {
+        return repository.getItemCount()
+    }
+
 }

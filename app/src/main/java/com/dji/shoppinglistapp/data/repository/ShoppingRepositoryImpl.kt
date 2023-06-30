@@ -29,4 +29,8 @@ class ShoppingRepositoryImpl(
         return dao.getAllItems()
     }
 
+    override fun getItemCount(): Flow<Int> {
+        return dao.getItemCount()
+    }
+
 }

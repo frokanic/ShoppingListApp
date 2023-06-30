@@ -1,8 +1,11 @@
 package com.dji.shoppinglistapp.presentation.shopping_list_screen
 
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,9 +23,17 @@ class ShoppingListFragment : Fragment() {
     private val viewModel: ShoppingListViewModel by viewModels()
     private lateinit var adapter: ShoppingListAdapter
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentShoppingListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentShoppingListBinding.bind(view)
 
         setupRecyclerView()
         subscribeToObservers()
@@ -30,7 +41,11 @@ class ShoppingListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = ShoppingListAdapter()
+        adapter = ShoppingListAdapter(
+            editHandler = { item -> viewModel.updateItem(item) },
+            deleteHandler = { item -> viewModel.deleteItem(item) }
+        )
+
         binding.rvItems.layoutManager = LinearLayoutManager(requireContext())
         binding.rvItems.adapter = adapter
     }
@@ -42,6 +57,10 @@ class ShoppingListFragment : Fragment() {
 
         viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.itemCount.observe(viewLifecycleOwner) { count ->
+            binding.btnClear.isEnabled = count > 0
         }
     }
 
@@ -55,8 +74,21 @@ class ShoppingListFragment : Fragment() {
         }
 
         binding.btnClear.setOnClickListener {
-            viewModel.deleteAllItems()
+            val itemCount = viewModel.itemCount.value ?: 0
+            if (itemCount > 0) {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Confirm Clear")
+                    .setMessage("Are you sure you want to clear all items?")
+                    .setPositiveButton("Yes") { _, _ ->
+                        viewModel.deleteAllItems()
+                    }
+                    .setNegativeButton("No", null)
+                    .show()
+            } else {
+                Toast.makeText(requireContext(), "No items to clear", Toast.LENGTH_SHORT).show()
+            }
         }
+
     }
 
     override fun onDestroyView() {

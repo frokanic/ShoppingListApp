@@ -15,4 +15,5 @@ interface ShoppingRepository {
 
     fun getAllItems(): Flow<List<ListItem>>
 
+    fun getItemCount(): Flow<Int>
 }
