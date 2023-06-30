@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,39 +7,51 @@
 
     <TextView
         android:id="@+id/item_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
         android:textSize="16sp"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/checkBox"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Item name" />
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/item_name"
-        android:layout_marginStart="8dp"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_name"
+        app:layout_constraintEnd_toStartOf="@+id/edit_symbol"
+        app:layout_constraintTop_toTopOf="@+id/item_name" />
 
     <ImageView
         android:id="@+id/edit_symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/checkBox"
-        android:layout_marginStart="8dp"
         android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Edit symbol"
         android:src="@android:drawable/ic_menu_edit"
-        android:contentDescription="Edit symbol" />
+        app:layout_constraintBottom_toBottomOf="@+id/item_name"
+        app:layout_constraintEnd_toStartOf="@+id/delete_symbol"
+        app:layout_constraintTop_toTopOf="@+id/item_name" />
 
     <ImageView
         android:id="@+id/delete_symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/edit_symbol"
-        android:layout_marginStart="8dp"
         android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Delete symbol"
         android:src="@drawable/ic_custom_delete"
-        android:contentDescription="Delete symbol" />
+        app:layout_constraintBottom_toBottomOf="@+id/item_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_name" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

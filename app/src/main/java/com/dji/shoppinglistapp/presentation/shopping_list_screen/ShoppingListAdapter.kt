@@ -3,8 +3,6 @@ package com.dji.shoppinglistapp.presentation.shopping_list_screen
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dji.shoppinglistapp.databinding.ItemListitemBinding
 import com.dji.shoppinglistapp.domain.model.ListItem
