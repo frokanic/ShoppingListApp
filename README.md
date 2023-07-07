@@ -17,7 +17,6 @@ The Shopping List App is an Android application that allows users to create and 
 ## 🚀 Technologies and Libraries Used
 
 - 🏢 Clean Architecture
-- 🏗️ MVVM (Model-View-ViewModel) architecture
 - 🌐 [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) Dependency Injection
 - 🚀 Kotlin programming language
 - 🏛️ Android Architecture Components: ViewModel, LiveData
